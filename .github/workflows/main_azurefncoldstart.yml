@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy dotnet core project to Azure Function App - azurefncoldstart
+name: Build and deploy dotnet core app to Azure Function App - azurefncoldstart
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
@@ -30,7 +30,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: 'Resolve Project Dependencies Using Dotnet'
-        shell: bash
+        shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
@@ -39,9 +39,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_470FDDAC16E140708AF4C121B0265B3D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_768ED8B3403642C3811D8D18BA8E4F08 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A6F6796DB96C4CD7A135A2CF78338E53 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_29E18724657D4AEAA9E13AD9B5FAEC05 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1B7A821F81D242818F024632E6F6B7D2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FEFB7FDD3FA74B799610C1DBF7EDE8D5 }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
